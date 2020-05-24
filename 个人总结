@@ -1,0 +1,11 @@
+（一）随机森林算法做特征重要度排序包括两种方法
+     1.impurity decrease 计算每一个特征对模型节点分裂impurity的贡献，这种方法有两个缺陷，第一点是无法处理相关性较强的特征解释（这是大多数模型面临的
+     问题），第二点是偏向于取值较多的类别型变量
+2.permutation importance 在fit好模型后，对valid data set的数据做permutation，计算scoring差值
+（二）随机森林算法做聚类和异常点识别
+    对于难以使用通常的metric（Euclid distance、Cosine similarity）计算相似度的样本来说，比如既包含continuous variable，又包含categorical
+    variable的样本聚类问题，随机森林算法通过random synthetic new samples（https://nishanthu.github.io/articles/ClusteringUsingRandomForest.html）
+    ，作为new class，生成随机森林模型，继而通过两个样本在相同叶子节点的子树数量来计算相似度，生成所有样本的相似度矩阵，然后实现聚类，也可以做feature importance、outlier detection（for samples estimated to new class）
+（三）random forest + LR，random forest used for feature transformation，to produce high-dimensional sparse space
+（四）for high-cardinality categorical features,one-hot encoding is not a good idea for tree-bases model.target encoding is a good choice
+（五）can use partition dependence plot to interpre feature relation to target
